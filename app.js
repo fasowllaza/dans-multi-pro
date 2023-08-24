@@ -15,8 +15,8 @@ app.use(express.urlencoded({extended:true}))
 app.post("/register", userController.registerUser)
 app.post("/login", userController.loginUser )
 app.use(authentication)
-app.get('/getJob', recruitmentController.getQuote)
-app.get('/getDetail', recruitmentController.getQuote)
+app.get('/getJob', recruitmentController.getRecruitment)
+app.get('/getDetail/:id', recruitmentController.getRecruitmentDetail)
 
 app.use(errorHandler)
 

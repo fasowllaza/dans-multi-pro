@@ -1,14 +1,34 @@
 const axios = require('axios')
+const {addParameter} = require("../helpers/url")
+
+// const urlApi = process.env.URL_DANS
+
+const urlApi = "http://dev3.dansmultipro.co.id/api/recruitment/positions"
 
 class Controller {
-    static getQuote (req, res, next) {
-        let urlApi = "https://api.quotable.io/random"
-        let quote
-        axios.get(urlApi)
+    static getRecruitment (req, res, next) {
+        const newUrl = addParameter(`${urlApi}.json`, req.query)
+        axios.get(newUrl, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
         .then((data)=>{ 
-            quote = `"${data.data.content}" by ${data.data.author}`
-            res.status(200).json(quote)
-            
+            res.status(200).json(data.data)
+        })
+        .catch((err) => {
+            next(err)
+        })
+    }
+    static getRecruitmentDetail (req, res, next) {
+        const newUrl =  `${urlApi}/${req.params.id}`
+        axios.get(newUrl, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((data)=>{ 
+            res.status(200).json(data.data)
         })
         .catch((err) => {
             next(err)

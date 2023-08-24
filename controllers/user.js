@@ -1,5 +1,5 @@
 const {User} = require("../models")
-const {decode} = require("../helpers/bcrypt")
+const {decode, encode} = require("../helpers/bcrypt")
 const {sign} = require("../helpers/jwt")
 
 class Controller{
@@ -8,6 +8,7 @@ class Controller{
             username:req.body.username,
             password:req.body.password
         }
+        userData.password = encode(userData.password)
         User
         .create(userData)
         .then((data)=>{
@@ -30,6 +31,7 @@ class Controller{
             username:req.body.username,
             password:req.body.password,
         }
+        console.log(userData)
         User
         .findOne({
             where:{
