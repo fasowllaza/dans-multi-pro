@@ -1,3 +1,0 @@
-1. run sequelize db create
-2. run sequelize db:migrate:all
-3. make username and password

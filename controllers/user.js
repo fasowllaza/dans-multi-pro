@@ -31,7 +31,6 @@ class Controller{
             username:req.body.username,
             password:req.body.password,
         }
-        console.log(userData)
         User
         .findOne({
             where:{
@@ -42,12 +41,9 @@ class Controller{
             if(data){
                 if(decode(userData.password,data.password)){
                     let payload = {
-                        name:data.name,
-                        email:data.email,
-                        role:data.role,
-                        id:data.id,
-                        verified:data.verified
+                        username: data.username
                     }
+
                     const access_token = sign(payload)
                     res.status(200).json({access_token})
                 }
